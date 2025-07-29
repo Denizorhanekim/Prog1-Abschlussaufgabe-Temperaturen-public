@@ -117,7 +117,7 @@ Implementieren Sie eine Klasse `Main` mit der gewohnten `main`-Methode, um den C
 
 Fällt Ihnen etwas Seltsames auf? Falls ja, woran könnte das liegen? Können Sie das Problem beheben, und wie ändert sich danach das Ergebnis (für die letzten 2 Fragen gibt es keine Punkte, es ist rein freiwillig)?
 
-Analyse und Beobachtungen
+Antwortsätze für Analyseaufgabe
 Ich habe die Aufgabe schrittweise umgesetzt und die Durchschnittstemperaturen für zwei Jahre (1937 und 1950) an derselben Station (Siegen) berechnet und auf der Konsole ausgegeben und in diesem Moment bevor ich das Weitere von der Analyse-Aufgabe  gelesen habe,  fiel mir auf, dass in beiden Fällen die berechnete Durchschnittstemperatur -999 °C betrug.
 
 Nach genauerem Hinsehen stellte ich fest, dass fehlende Temperaturdaten in der CSV-Datei vom DWD mit dem Wert -999 gekennzeichnet sind. Diese Werte wurden bei der Berechnung des Durchschnitts mit einbezogen, was zu stark verfälschten Durchschnittstemperaturen führte. Temperaturen von -999 °C sind physikalisch unmöglich und deuten auf fehlende oder ungültige Daten hin.
