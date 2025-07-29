@@ -118,11 +118,11 @@ Implementieren Sie eine Klasse `Main` mit der gewohnten `main`-Methode, um den C
 Fällt Ihnen etwas Seltsames auf? Falls ja, woran könnte das liegen? Können Sie das Problem beheben, und wie ändert sich danach das Ergebnis (für die letzten 2 Fragen gibt es keine Punkte, es ist rein freiwillig)?
 
 Analyse und Beobachtungen
-Ich habe die Aufgabe schrittweise umgesetzt und die Durchschnittstemperaturen für zwei Jahre (1937 und 1950) an derselben Station (Siegen) berechnet und auf der Konsole ausgegeben und in diesem Moment bevor ich das Weitere von der Analyse-Aufgabe  gelesen habe,  fiel mir auf, dass in beiden Fällen die berechnete Durchschnittstemperatur -999 °C betrug – ein offensichtlich fehlerhafter Wert.
+Ich habe die Aufgabe schrittweise umgesetzt und die Durchschnittstemperaturen für zwei Jahre (1937 und 1950) an derselben Station (Siegen) berechnet und auf der Konsole ausgegeben und in diesem Moment bevor ich das Weitere von der Analyse-Aufgabe  gelesen habe,  fiel mir auf, dass in beiden Fällen die berechnete Durchschnittstemperatur -999 °C betrug.
 
 Nach genauerem Hinsehen stellte ich fest, dass fehlende Temperaturdaten in der CSV-Datei vom DWD mit dem Wert -999 gekennzeichnet sind. Diese Werte wurden bei der Berechnung des Durchschnitts mit einbezogen, was zu stark verfälschten Durchschnittstemperaturen führte. Temperaturen von -999 °C sind physikalisch unmöglich und deuten auf fehlende oder ungültige Daten hin.
 
-Zunächst habe ich alle -999-Werte durch 0 ersetzt, um sie als ungültig zu markieren. Doch auch das führte zu Problemen: Die Durchschnittstemperaturen wurden nun als 0 °C berechnet – was erneut nicht der Realität entsprach. Dadurch wurde mir klar, dass ungültige oder fehlende Werte weder als 0 noch als -999 in die Berechnung einfließen dürfen.
+Zunächst habe ich alle -999-Werte durch 0 ersetzt, um sie als ungültig zu markieren. Doch auch das führte zu Problemen, da wir mathematische Berechnungen durchführen, wurden 0's nicht zum Ungültig-Markieren des Dateien führen sondern mitberechnet: Die Durchschnittstemperaturen wurden nun als 0 °C berechnet – was erneut nicht der Realität entsprach. Dadurch wurde mir klar, dass ungültige oder fehlende Werte weder als 0 noch als -999 in die Berechnung einfließen dürfen.
 
 Letztlich habe ich mein Programm so angepasst, dass alle ungültigen Werte als NaN (Not a Number) markiert werden. Beim Berechnen der Durchschnittstemperatur werden diese Werte ignoriert – sie zählen weder zum Summenwert noch zur Zähleranzahl (gültiger Tage). Dadurch konnte ich auf Basis der tatsächlich vorhandenen, gültigen Messwerte eine realistischere Durchschnittstemperatur berechnen.
 
