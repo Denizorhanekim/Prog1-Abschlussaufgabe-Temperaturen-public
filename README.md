@@ -116,3 +116,42 @@ Implementieren Sie eine Klasse `TemperatureTimeSeries`, die eine Zeitreihe von T
 Implementieren Sie eine Klasse `Main` mit der gewohnten `main`-Methode, um den Code als eigenständiges Programm auszuführen. Führen Sie das Programm mit einer Datei von der DWD-Webseite für eine Station Ihrer Wahl aus. Filtern Sie datai mit der Methode `filterByYear()` zwei Jahre Ihrer Wahl heraus, die mindestens 10 Jahre auseinanderliegen. Lassen Sie sich dann für diese beiden Jahre jeweils die Gesamt-Durchschnittstemperatur (berechnet über die Methode `getOverallAvg()`) ausgeben und geben Sie die Ergebnisse (Stationsname, die 2 Jahreszahlen sowie die entsprechenden Temperaturen) als Antwort als die Analyseaufgabe an. Beschreiben Sie zudem kurz die Ergebnisse. 
 
 Fällt Ihnen etwas Seltsames auf? Falls ja, woran könnte das liegen? Können Sie das Problem beheben, und wie ändert sich danach das Ergebnis (für die letzten 2 Fragen gibt es keine Punkte, es ist rein freiwillig)?
+
+📊 Analyse und Beobachtungen
+Ich habe die Aufgabe schrittweise umgesetzt und die Durchschnittstemperaturen für zwei Jahre (1937 und 1950) an derselben Station (Siegen) berechnet und auf der Konsole ausgegeben. Dabei fiel mir auf, dass in beiden Fällen die berechnete Durchschnittstemperatur -999 °C betrug – ein offensichtlich fehlerhafter Wert.
+
+Nach genauerem Hinsehen stellte ich fest, dass fehlende Temperaturdaten in der CSV-Datei vom DWD mit dem Wert -999 gekennzeichnet sind. Diese Werte wurden bei der Berechnung des Durchschnitts mit einbezogen, was zu stark verfälschten Durchschnittstemperaturen führte. Temperaturen von -999 °C sind physikalisch unmöglich und deuten auf fehlende oder ungültige Daten hin.
+
+Zunächst habe ich alle -999-Werte durch 0 ersetzt, um sie als ungültig zu markieren. Doch auch das führte zu Problemen: Die Durchschnittstemperaturen wurden nun als 0 °C berechnet – was erneut nicht der Realität entsprach. Dadurch wurde mir klar, dass ungültige oder fehlende Werte weder als 0 noch als -999 in die Berechnung einfließen dürfen.
+
+Letztlich habe ich mein Programm so angepasst, dass alle ungültigen Werte als NaN (Not a Number) markiert werden. Beim Berechnen der Durchschnittstemperatur werden diese Werte ignoriert – sie zählen weder zum Summenwert noch zur Zähleranzahl (gültiger Tage). Dadurch konnte ich auf Basis der tatsächlich vorhandenen, gültigen Messwerte eine realistischere Durchschnittstemperatur berechnen.
+
+Trotzdem ist mir bewusst: Wenn für viele Tage eines Jahres keine Daten vorliegen, ist die Aussagekraft des Durchschnittswerts eingeschränkt. Denn wir wissen nicht, wie warm oder kalt es an den fehlenden Tagen war.
+
+Weitere Auffälligkeiten bei der Analyse
+Nach der Korrektur habe ich die Analyse ausgeweitet und für zwei verschiedene Stationen vier Jahre miteinander verglichen: 1937, 1950, 1986 und 2024.
+
+Die Stationen waren:
+
+Siegen (Kläranlage)
+
+Tann/Röhn
+
+**Die CSV-Datei von Siegen enthält keine Daten für 2024, daher erscheint dort NaN als Durchschnittstemperatur.
+
+**Die CSV-Datei von Tann/Röhn enthält keine Daten für 1937 und 1950, daher ist auch hier der Durchschnitt NaN für diese Jahre.
+
+📟 Konsolenausgabe:
+Analyse fuer DWD-Daten:
+
+Station: Siegen (Klaeranlage)
+Jahr 1937: Durchschnittstemperatur = 8,58 °C
+Jahr 1950: Durchschnittstemperatur = 8,60 °C
+Jahr 1986: Durchschnittstemperatur = 8,44 °C
+Jahr 2024: Durchschnittstemperatur = NaN °C
+
+Station: Tann/Roehn
+Jahr 1937: Durchschnittstemperatur = NaN °C
+Jahr 1950: Durchschnittstemperatur = NaN °C
+Jahr 1986: Durchschnittstemperatur = 7,52 °C
+Jahr 2024: Durchschnittstemperatur = 10,41 °C
