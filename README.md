@@ -155,4 +155,4 @@ Jahr 1937: Durchschnittstemperatur = NaN °C
 Jahr 1950: Durchschnittstemperatur = NaN °C
 Jahr 1986: Durchschnittstemperatur = 7,52 °C
 Jahr 2024: Durchschnittstemperatur = 10,41 °C
-https://www.notion.so/Abschlussaufgabe-236791afbae680dd80d9ca4d72e4bd37?source=copy_link
+
